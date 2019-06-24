@@ -29,8 +29,14 @@
                     </f:selectItem>
                 </p:selectOneRadio>
                 
-                <p:outputLabel value="Nome:"></p:outputLabel>
+                <p:outputLabel value="Nome:" ></p:outputLabel>
                 <p:inputText value="#{fornecedorBean.entity.nome}"></p:inputText>
+                
+                <p:outputLabel value="CPF:" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:outputLabel>
+                <p:inputMask size="15" mask="999.999.999-99" value="#{fornecedorBean.entity.cpf}" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:inputMask>
+
+                <p:outputLabel value="RG:" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.rg}"  rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:inputText>    
                 
                 <p:outputLabel value="Inscrição:"></p:outputLabel>
                 <p:inputText value="#{fornecedorBean.entity.inscricao}"></p:inputText>                
@@ -49,13 +55,7 @@
                 <p:inputText value="#{fornecedorBean.entity.website}"></p:inputText>
 
                 <p:outputLabel value="CNPJ:" rendered="#{fornecedorBean.tipoFornecedor == 0}"></p:outputLabel>
-                <p:inputMask size="15" mask="99.999.999/9999-99" value="#{fornecedorBean.entity.cnpj}"></p:inputMask>
-
-                <p:outputLabel value="CPF:"></p:outputLabel>
-                <p:inputMask size="15" mask="999.999.999-99" value="#{fornecedorBean.entity.cpf}"></p:inputMask>
-
-                <p:outputLabel value="RG:" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:outputLabel>
-                <p:inputText value="#{fornecedorBean.entity.rg}"></p:inputText>                                
+                <p:inputMask size="15" mask="99.999.999/9999-99" value="#{fornecedorBean.entity.cnpj}" rendered="#{fornecedorBean.tipoFornecedor == 0}"></p:inputMask>                                          
                
 
             </p:panelGrid>
@@ -77,7 +77,7 @@
                 </p:column>
 
                 <p:column headerText="CNPJ/CPF">
-                    <h:outputText value="#{fornecedor.cnpj.isEmpty() ? fornecedor.cpf : fornecedor.cnpj}"></h:outputText>
+                    <h:outputText value="#{fornecedor.cnpj.isEmpty() || null ? fornecedor.cpf : fornecedor.cnpj}"></h:outputText>
                 </p:column>
 
                 <p:column headerText="Telefone">

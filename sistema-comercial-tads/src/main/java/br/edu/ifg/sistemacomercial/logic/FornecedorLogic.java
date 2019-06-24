@@ -34,14 +34,18 @@ public class FornecedorLogic implements GenericLogic<Fornecedor, Integer> {
             }
             
         }
-        if(entity.getCnpj()!= null & entity.getCpf() != null){
-            throw new NegocioException("CPF: Para pessoa física.\nCNPJ: Para pessoa juridica.");
+        if(entity.getCnpj()!= null && entity.getCpf() != null && Assert.isCnpjValido(entity.getCnpj())){
+            entity.setCpf("");
+            entity.setRg("");
+         }
+        if(entity.getCnpj()!= null && entity.getCpf() != null && Assert.isCpf(entity.getCpf())){           
+            entity.setCnpj("");        
  
-            }
+         }
          if(!Assert.isValidEmail(entity.getEmail())){
              throw new NegocioException("Email inválido.");
         }                  
-        
+        if(entity.getCnpj()== null) entity.setCnpj("");
         dao.salvar(entity);
         return null;    
     }

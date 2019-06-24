@@ -21,7 +21,7 @@ public class FornecedorBean extends GenericCrud<Fornecedor, FornecedorLogic>{
     @Inject
     private FornecedorLogic logic;
     
-    private int tipoFornecedor =1;
+    private int tipoFornecedor;
 
     public int getTipoFornecedor() {
         return tipoFornecedor;
