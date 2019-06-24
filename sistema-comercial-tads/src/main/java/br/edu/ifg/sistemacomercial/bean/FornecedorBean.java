@@ -17,9 +17,19 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class FornecedorBean extends GenericCrud<Fornecedor, FornecedorLogic>{
-
+    
     @Inject
     private FornecedorLogic logic;
+    
+    private int tipoFornecedor =1;
+
+    public int getTipoFornecedor() {
+        return tipoFornecedor;
+    }
+
+    public void setTipoFornecedor(int tipoFornecedor) {
+        this.tipoFornecedor = tipoFornecedor;
+    }
     
     @Override
     public FornecedorLogic getLogic() {

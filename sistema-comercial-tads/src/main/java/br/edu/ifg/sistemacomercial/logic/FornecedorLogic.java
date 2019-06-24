@@ -18,12 +18,26 @@ public class FornecedorLogic implements GenericLogic<Fornecedor, Integer> {
         if("".equals(entity.getNome().trim())){
             throw new NegocioException("Nome do fornecedor é obrigatório.");
         }
-        if(!Assert.isCnpjValido(entity.getCnpj())){
-            throw new NegocioException("CNPJ inválido.");
+        if(entity.getCnpj()== null && entity.getCpf()== null){
+            if(!Assert.isCnpjValido(entity.getCnpj())){
+                throw new NegocioException("CNPJ inválido.");
+            }
+            if(!Assert.isCpf(entity.getCpf())){
+                 throw new NegocioException("CPF inválido.");
+            }
+        }else{
+            if(entity.getCnpj()== null && !Assert.isCpf(entity.getCpf())){
+                throw new NegocioException("CPF inválido.");
+            }
+            if(entity.getCpf()== null && !Assert.isCnpjValido(entity.getCnpj())){
+                throw new NegocioException("CNPJ inválido.");
+            }
+            
         }
-        if(!Assert.isCpf(entity.getCpf())){
-             throw new NegocioException("CPF inválido.");
-        }
+        if(entity.getCnpj()!= null & entity.getCpf() != null){
+            throw new NegocioException("CPF: Para pessoa física.\nCNPJ: Para pessoa juridica.");
+ 
+            }
          if(!Assert.isValidEmail(entity.getEmail())){
              throw new NegocioException("Email inválido.");
         }                  
