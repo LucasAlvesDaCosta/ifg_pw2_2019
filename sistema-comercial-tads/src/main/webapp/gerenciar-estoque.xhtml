@@ -10,9 +10,9 @@
                 xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom">
 
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
-
+ <ui:param name="tituloPagina" value="Gerenciar Estoque"></ui:param>
     <h:form>
-        <p:fieldset legend="Movimento Estoque">
+        <p:fieldset legend="Gerenciar Estoque">
             <si:toolbar-crud crudBean="#{movimentoEstoqueBean}"/>
 
             <p:panelGrid columns="2" styleClass="ui-noborder" 
@@ -22,7 +22,7 @@
                 <p:selectOneMenu value="#{movimentoEstoqueBean.entity.produto}">
                     <f:selectItem itemLabel="Selecione o Produto" itemValue=""></f:selectItem>
                     <f:selectItems value="#{movimentoEstoqueBean.produtos}" var="pro" 
-                                   itemLabel="#{pro.nome}" itemValue="#{pro}"></f:selectItems> 
+                                   itemLabel="#{pro.nome .concat(' | ') .concat(pro.marca)}" itemValue="#{pro}"></f:selectItems> 
                 </p:selectOneMenu>
                 
                 <p:outputLabel value="Fornecedor:"></p:outputLabel>
@@ -63,7 +63,7 @@
                     <si:colunaAcoes crudBean="#{movimentoEstoqueBean}" entity="#{movimentoEstoque}"></si:colunaAcoes>
                 </p:column>   
                 
-                <p:column headerText="Tipo Movimento">
+                <p:column headerText="Tipo Movimento" sortBy="#{movimentoEstoque.tipoMovimento}">
                     <div style="color: #{movimentoEstoque.tipoMovimento == 'SAIDA'?'red':'green'}">
                         <h:outputText value="#{movimentoEstoque.tipoMovimento.nome}"></h:outputText>
                         <i class="fa #{movimentoEstoque.tipoMovimento == 'SAIDA'?'fa-arrow-up':'fa-arrow-down'} "></i>
@@ -74,19 +74,19 @@
                     <h:outputText value="#{movimentoEstoque.produto.nome}"></h:outputText>
                 </p:column>
                 
-                <p:column headerText="Fornecedor">
+                <p:column headerText="Fornecedor" sortBy="#{movimentoEstoque.fornecedor.nome}">
                     <h:outputText value="#{movimentoEstoque.fornecedor.nome}"></h:outputText>
                 </p:column>                
                 
                 <p:column headerText="Quantidade">
                     <h:outputText value="#{movimentoEstoque.quantidadeRecebida}"></h:outputText>
                 </p:column>
-                <p:column headerText="Preço de Custo">
+                <p:column headerText="Preço de Custo" sortBy="#{movimentoEstoque.precoCusto}">
                     <h:outputText value="#{movimentoEstoque.precoCusto}">
                         <f:convertNumber type="currency"></f:convertNumber>
                     </h:outputText>
                 </p:column>
-                <p:column headerText="Data Movimento">
+                <p:column headerText="Data Movimento" sortBy="#{movimentoEstoque.dataMovimento}">
                     <h:outputText value="#{movimentoEstoque.dataMovimento}">
                         <f:convertDateTime></f:convertDateTime>
                     </h:outputText>
