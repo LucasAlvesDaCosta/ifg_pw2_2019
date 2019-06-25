@@ -11,7 +11,7 @@
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
     <ui:param name="tituloPagina" value="Gerenciar Fornecedores"></ui:param>
     <h:form>
-        <p:fieldset legend="Gerenciar Fornecedor">
+        <p:fieldset legend="Gerenciar Fornecedores">
 
             <si:toolbar-crud crudBean="#{fornecedorBean}"/>                
 
@@ -32,32 +32,32 @@
                 <p:outputLabel value="Nome:" ></p:outputLabel>
                 <p:inputText value="#{fornecedorBean.entity.nome}"></p:inputText>
                 
+                <p:outputLabel value="CNPJ:" rendered="#{fornecedorBean.tipoFornecedor == 0}"></p:outputLabel>
+                <p:inputMask size="15" mask="99.999.999/9999-99" value="#{fornecedorBean.entity.cnpj}" rendered="#{fornecedorBean.tipoFornecedor == 0}"></p:inputMask>                                                         
+                
                 <p:outputLabel value="CPF:" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:outputLabel>
                 <p:inputMask size="15" mask="999.999.999-99" value="#{fornecedorBean.entity.cpf}" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:inputMask>
 
                 <p:outputLabel value="RG:" rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:outputLabel>
                 <p:inputText value="#{fornecedorBean.entity.rg}"  rendered="#{fornecedorBean.tipoFornecedor == 1}"></p:inputText>    
                 
-                <p:outputLabel value="Inscrição:"></p:outputLabel>
-                <p:inputText value="#{fornecedorBean.entity.inscricao}"></p:inputText>                
-
-                <p:outputLabel value="Telefone 01:"></p:outputLabel>
-                <p:inputText value="#{fornecedorBean.entity.telefone1}"></p:inputText>
-
-                <p:outputLabel value="Telefone 02:"></p:outputLabel>
-                <p:inputText value="#{fornecedorBean.entity.telefone2}"></p:inputText>
-
                 <p:outputLabel value="Email:"></p:outputLabel>
                 <p:inputText value="#{fornecedorBean.entity.email}">                   
                 </p:inputText>
 
+                <p:outputLabel value="Inscrição:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.inscricao}"></p:inputText>                
+
+                <p:outputLabel value="Telefone 01:"></p:outputLabel>
+                <p:inputMask size="15" mask="(99) 9999 -9999" value="#{fornecedorBean.entity.telefone1}"></p:inputMask>
+
+                <p:outputLabel value="Telefone 02:"></p:outputLabel>
+                <p:inputMask size="15" mask="(99) 9999 -9999" value="#{fornecedorBean.entity.telefone2}"></p:inputMask>               
+                
                 <p:outputLabel value="Web-Site:"></p:outputLabel>
                 <p:inputText value="#{fornecedorBean.entity.website}"></p:inputText>
 
-                <p:outputLabel value="CNPJ:" rendered="#{fornecedorBean.tipoFornecedor == 0}"></p:outputLabel>
-                <p:inputMask size="15" mask="99.999.999/9999-99" value="#{fornecedorBean.entity.cnpj}" rendered="#{fornecedorBean.tipoFornecedor == 0}"></p:inputMask>                                          
-               
-
+                
             </p:panelGrid>
             <p:spacer height="20px"></p:spacer>
 
@@ -77,7 +77,7 @@
                 </p:column>
 
                 <p:column headerText="CNPJ/CPF">
-                    <h:outputText value="#{fornecedor.cnpj.isEmpty() || null ? fornecedor.cpf : fornecedor.cnpj}"></h:outputText>
+                    <h:outputText value="#{fornecedor.cnpj.isEmpty() ? fornecedor.cpf : fornecedor.cnpj}"></h:outputText>
                 </p:column>
 
                 <p:column headerText="Telefone">
